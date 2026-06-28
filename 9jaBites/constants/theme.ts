@@ -11,6 +11,6 @@ export const Colors = {
 
 export const Fonts = {
   brand: 'Nunito',
-  brandBold: 'Nunito_700Bold',
+  brandBold: 'Nunito_700Bold_Italic',
   brandBlack: 'Nunito_900Black',
 };
