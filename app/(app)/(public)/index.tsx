@@ -5,6 +5,7 @@ import { Fonts } from "@/constants/theme";
 import { StyleSheet, Text, View, Image, TouchableOpacity, Linking } from "react-native";
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useRouter, Link } from "expo-router";
 
 export default function Index() {
   const openWebBrowser = () => {
@@ -51,9 +52,11 @@ export default function Index() {
             <GoogleAuthButton />
           </Animated.View>
           <Animated.View entering={FadeInDown.delay(300)}>
+            <Link href={'/(app)/(public)/other-options'} asChild>
             <TouchableOpacity style={styles.otherButtons}>
               <Text style={styles.otherButtonsText}>Na wa, No Apple or Google. chai!</Text>
             </TouchableOpacity>
+            </Link>
           </Animated.View>
         </View>
         <Animated.View style = {styles.privacyContainer} entering ={FadeInDown.delay(400)}>
