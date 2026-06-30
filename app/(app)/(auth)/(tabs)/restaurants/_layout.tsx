@@ -6,8 +6,7 @@ const Layout = () =>{
         <Stack screenOptions={{contentStyle:{backgroundColor: '#fff'}}}> 
             <Stack.Screen 
             name = 'index'
-            options= {{title: 'Restuarants', headerLargeTitle: true, headerTransparent: true
-            }}/>
+            options= {{ headerShown: false  }}/>
         </Stack>   
      );
 };
