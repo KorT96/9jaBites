@@ -1,17 +1,31 @@
-import { View, Text, StyleSheet } from 'react-native';
-import { CategoryList } from '../CategoryList';
-import RestaurantList from '../RestaurantList';
-import Animated from 'react-native-reanimated';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Fonts } from '@/constants/theme';
+import { StyleSheet, Text, View } from 'react-native';
+import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { CategoryList } from '../CategoryList';
+import RestaurantHeader from '../RestaurantHeader';
+import RestaurantList from '../RestaurantList';
 
-const Restaurants = () => {
+const HEADER_HEIGHT = 60;
+const RestaurantListPage = () => {
     const insets = useSafeAreaInsets();
+    const scrollOffset = useSharedValue(0);
 
+
+    const scrollHandler = useAnimatedScrollHandler({
+        onScroll: (event) => {
+            scrollOffset.value = event.contentOffset.y;
+        }
+    })
     return (
         <View style ={styles.container}>
-            <Animated.ScrollView showsVerticalScrollIndicator = {false}
-            contentContainerStyle ={{paddingTop:insets.top + 60}}>
+
+            <RestaurantHeader title='Restaurants' scrollOffset={scrollOffset}/>
+            <Animated.ScrollView
+            onScroll={scrollHandler}
+            scrollEventThrottle={16} 
+            showsVerticalScrollIndicator = {false}
+            contentContainerStyle ={{paddingTop:insets.top + HEADER_HEIGHT}}>
                 <Text style ={styles.pageTitle}> Food Joints</Text>
                 <CategoryList/>
 
@@ -21,6 +35,7 @@ const Restaurants = () => {
         </View>
     )
 };
+
 
 const styles = StyleSheet.create({
     container:{
@@ -39,4 +54,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
     },
 }); 
-export default Restaurants
+export default RestaurantListPage;
+
+

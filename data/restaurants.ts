@@ -44,7 +44,7 @@ export const restaurants: Restaurant[] = [
       latitude: 51.9625,
       longitude: 7.6257,
     },
-    tags: ['Fast delivery', 'Free delivery over €15'],
+    tags: ['Fast delivery', 'Free delivery over ₦15'],
     isOpen: true,
     openingHours: {
       monday: '11:00-22:00',

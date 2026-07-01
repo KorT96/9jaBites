@@ -1,12 +1,72 @@
-import { Stack } from "expo-router";
-import { View, Text } from "react-native";
+import { Colors } from '@/constants/theme';
+import { Ionicons } from '@expo/vector-icons';
+import { useRouter, Stack } from 'expo-router';
+import { TouchableOpacity } from 'react-native';
+import Transition from 'react-native-screen-transitions';
+
 
 const Layout = () => {
-    return(
-        <Stack>
-            <Stack.Screen name='(tabs)' options = {{headerShown:false}}/>
-        </Stack>
-    );
+  const router = useRouter();
+  return (
+    <Stack>
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="(modal)/location"
+        options={{
+          presentation: 'formSheet',
+          sheetAllowedDetents: [0.7],
+          title: '',
+          headerShadowVisible: false,
+          sheetCornerRadius: 16,
+          sheetGrabberVisible: true,
+          headerRight: () => (
+            <TouchableOpacity
+              style={{ padding: 4, borderRadius: 20, backgroundColor: Colors.light }}
+              onPress={() => router.dismiss()}>
+              <Ionicons name="close-sharp" size={28} />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="(modal)/filter"
+        options={{
+          presentation: 'pageSheet',
+         
+          title: '',
+          headerShadowVisible: false,
+          sheetCornerRadius: 16,
+          sheetGrabberVisible: true,
+          contentStyle: {
+            backgroundColor: Colors.background,
+          },
+          headerRight: () => (
+            <TouchableOpacity
+              style={{ padding: 4, borderRadius: 20, backgroundColor: Colors.light }}
+              onPress={() => router.dismiss()}>
+              <Ionicons name="close-sharp" size={28} />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="(modal)/(menu)/[id]"
+        options={{
+          presentation: 'formSheet',
+          sheetAllowedDetents: [1],
+          title: '',
+          headerShadowVisible: false,
+          sheetCornerRadius: 16,
+          sheetGrabberVisible: true,
+          sheetExpandsWhenScrolledToEdge: true,
+          headerShown: false,
+          contentStyle: {
+            backgroundColor: '#fff',
+          },
+        }}
+      />
+    
+    </Stack>
+  );
 };
-
 export default Layout;
